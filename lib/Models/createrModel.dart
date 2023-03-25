@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
-import 'package:alalameya_api/customWidget.dart';
+import 'package:alalameya_api/Custom%20Widgets/TextWidget.dart';
 import 'package:alalameya_api/main.dart';
-import 'package:alalameya_api/products.dart';
+import 'package:alalameya_api/Screens/products.dart';
 import 'package:flutter/material.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
 

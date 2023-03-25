@@ -1,4 +1,5 @@
-import 'package:alalameya_api/customWidget.dart';
+import 'package:alalameya_api/Custom%20Widgets/BottomBarWidget.dart';
+import 'package:alalameya_api/Custom%20Widgets/TextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:alalameya_api/main.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
@@ -22,10 +23,10 @@ class Project extends StatelessWidget {
       'method': 'create',
       'args': [
         {
-        'name': projectName,
+          'name': projectName,
           'partner_email': 'gitter@gmail.com',
           'task_count': 5
-      }
+        }
       ],
       'kwargs': {},
     });
@@ -73,12 +74,6 @@ class Project extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Center(child: Text('Add Project')),
-          leading: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back)
-          ),
           backgroundColor: Colors.amber,
         ),
         body: Form(
@@ -123,33 +118,34 @@ class Project extends StatelessWidget {
                     },
                     child: Text("Add Now"),
                 ),
-          Expanded(
-            child: Center(
-              child: FutureBuilder(
-                  future: fetchProjectsReader(),
-                  builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) {
-                            final record =
-                            snapshot.data[index] as Map<String, dynamic>;
-                            return buildListItem(record);
-                          });
-                    } else {
-                      if (snapshot.hasError) return Text('Unable to fetch data');
-                      return CircularProgressIndicator();
-                    }
-                  }
+                Expanded(
+                  child: Center(
+                    child: FutureBuilder(
+                        future: fetchProjectsReader(),
+                        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  final record =
+                                  snapshot.data[index] as Map<String, dynamic>;
+                                  return buildListItem(record);
+                                });
+                          } else {
+                            if (snapshot.hasError) return Text('Unable to fetch data');
+                            return CircularProgressIndicator();
+                          }
+                        }
+                        ),
                   ),
-            ),
-          )
+                )
               ],
             ),
           ),
         ),
+        bottomNavigationBar: BottomBar(bottmBarIndex: 2,),
       ),
     );
   }

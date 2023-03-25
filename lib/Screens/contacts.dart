@@ -1,6 +1,7 @@
+import 'package:alalameya_api/Custom%20Widgets/BottomBarWidget.dart';
 import 'package:alalameya_api/Models/AddContactsModel.dart';
 import 'package:alalameya_api/main.dart';
-import 'package:alalameya_api/projectCreate.dart';
+import 'package:alalameya_api/Screens/projects.dart';
 import 'package:flutter/material.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
 
@@ -53,25 +54,6 @@ class Contacts extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Contacts')),
-        leading: IconButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.logout)
-        ),
-        actions: [
-          GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, Project.id);
-            },
-            child: Row(
-              children: [
-                Text("Add project"),
-                Icon(Icons.publish_rounded),
-              ],
-            ),
-          )
-        ],
         backgroundColor: Colors.amber,
       ),
       body: Center(
@@ -104,6 +86,7 @@ class Contacts extends StatelessWidget {
         },
         child: Icon(Icons.person_add),
       ),
+      bottomNavigationBar: BottomBar(bottmBarIndex: 1,),
     );
   }
 }

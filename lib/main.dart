@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:alalameya_api/Models/AddContactsModel.dart';
 import 'package:alalameya_api/Models/createrModel.dart';
-import 'package:alalameya_api/Contacts/contacts.dart';
-import 'package:alalameya_api/customWidget.dart';
-import 'package:alalameya_api/products.dart';
-import 'package:alalameya_api/projectCreate.dart';
+import 'package:alalameya_api/Screens/contacts.dart';
+import 'package:alalameya_api/Custom%20Widgets/TextWidget.dart';
+import 'package:alalameya_api/Screens/products.dart';
+import 'package:alalameya_api/Screens/projects.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
 import 'package:flutter/material.dart';
 
@@ -128,6 +128,7 @@ class HomePage extends StatelessWidget {
                             final orpc = await OdooClient(orpcURL);
                             try {
                               await orpc.authenticate(database, username, password);
+                              Navigator.pop(context);
                               Navigator.popAndPushNamed(context, Contacts.id);
                             } on OdooException catch (e) {
                               Navigator.pop(context);

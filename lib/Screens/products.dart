@@ -1,5 +1,6 @@
+import 'package:alalameya_api/Custom%20Widgets/BottomBarWidget.dart';
 import 'package:alalameya_api/Models/createrModel.dart';
-import 'package:alalameya_api/customWidget.dart';
+import 'package:alalameya_api/Custom%20Widgets/TextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:alalameya_api/main.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
@@ -84,13 +85,13 @@ class Products extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Edit product')),
-          leading: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back)
-          ),
+          title: const Center(child: Text('Product list')),
+          // leading: IconButton(
+          //     onPressed: (){
+          //       Navigator.pop(context);
+          //     },
+          //     icon: Icon(Icons.arrow_back)
+          // ),
           backgroundColor: Colors.amber,
         ),
         body: Form(
@@ -99,42 +100,6 @@ class Products extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Center(child:
-                Text('Please add name of product below',
-                  style: TextStyle(fontWeight: FontWeight.bold),)
-                ),
-                CustomTextFiled(
-                  controller: productController,
-                  onSaved: (value){
-                    productName = value!;
-                  },
-                  hintText: "Enter product name",
-                  icon: Icons.drive_file_rename_outline,
-                ),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25)),
-                  color: Colors.amber,
-                  onPressed: () async{
-                    try {
-                      if (_globalKey.currentState!.validate()) {
-                        _globalKey.currentState!.save();
-                        await productsEditor(productName!, 260.5 );
-                        Navigator.popAndPushNamed(context, Products.id);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("product edited successflly"),
-                        ));
-                      }
-
-                    } on OdooException catch (e) {
-                      print("Odoo Exception $e");
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Pleas enter correct product name"),
-                      ));
-                    }
-                  },
-                  child: Text("Add Now"),
-                ),
                 Expanded(
                   child: Center(
                     child: FutureBuilder(
@@ -168,6 +133,7 @@ class Products extends StatelessWidget {
           },
           child: Icon(Icons.add_business),
         ),
+        bottomNavigationBar: BottomBar(bottmBarIndex: 0,),
       ),
     );
   }
